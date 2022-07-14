@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
+</head>
+
+<body class="">
+    <main class="col-8 mx-auto">
+        <h1 class="text-center pt-5">Notes App using Django</h1>
+        <div class="sm-col-3 border p-4 rounded my-4 bg-secondary">
+            <form class="row" action="addnote" method="post">
+                {% csrf_token %}
+                <div class="input-group col-3 mb-3">
+                    <span class="input-group-text" id="" >Title</span>
+                    <input type="text" name="title" class="form-control" placeholder="Enter a title" aria-label="title">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="">Content</span>
+                    <textarea class="form-control" name="content" placeholder="Enter content" aria-label="With textarea"></textarea>
+                </div>
+                <button type="submit" class="btn btn-dark col-sm-2 mx-auto">Add Note</button>
+            </form>
+        </div>
+        <h3 class="text-center pb-2">All Notes</h3>
+        <div class="card-columns">
+            <div class="row">
+                {%  for note in notes %}
+                <div class="col-3 mb-4">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title d-flex justify-content-between align-items-center">
+                                <span>{{ note.Title }}</span>
+                                <a class="text-decoration-none text-dark" href="delete/{{ note.id }}">
+                                    <i class="bi bi-trash3"></i>
+                                </a>
+                            </h5>
+
+                            <div class="card-text mt-3">
+                               {{ note.Content }}
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                 {% endfor %}
+            </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
